@@ -1,4 +1,6 @@
 import mongoose, {Schema} from "mongoose";
+import jwt from 'jsonwebtoken'
+import bcrpyt from 'bcrpyt'
 
 const userSchema = new Schema(
     {
@@ -31,15 +33,23 @@ const userSchema = new Schema(
        coverImage: {
         type: String, /// url
        },
-       watc
-       email: String,
-       fullName: String,
-       avatar: String,
-       coverImage: String,
-       password: String,
-       refreshtoken: String,
-
+       watchHistory: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Video", // taking videoid
+        }
+       ],
+       password: {
+        type: String,
+        required: [true,'Password is required']
+       },
+       refreshtoken: {
+        type:String,
+       },
     }
 )
 
+userSchema.pre("save",async function (next) {
+    
+})
 export const user = mongoose.model("User", userSchema)
