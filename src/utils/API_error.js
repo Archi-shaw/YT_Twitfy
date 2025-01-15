@@ -17,6 +17,4 @@ class Apierror extends Error {
        Error.captureStackTrace
     }
   }
-
-
 }
